@@ -1,3 +1,4 @@
+
 package com.ecopark.ecoparkspring.model;
 
 import jakarta.persistence.Entity;
@@ -5,6 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 /**
  * Entidad que representa la tabla usuario en la base de datos.
@@ -17,11 +22,26 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(min = 3, max = 80, message = "El nombre debe tener entre 3 y 80 caracteres")
     private String nombre;
+
+    @NotBlank(message = "El email es obligatorio")
+    @Email(message = "El email no tiene un formato válido")
     private String email;
+
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Size(min = 6, max = 20, message = "La contraseña debe tener entre 6 y 20 caracteres")
     private String contrasena;
+
+    @NotBlank(message = "El celular es obligatorio")
+    @Pattern(regexp = "^[0-9]{7,20}$", message = "El celular solo debe contener números y tener entre 7 y 20 dígitos")
     private String celular;
+
     private boolean discapacidad;
+
+    @NotBlank(message = "El método de pago es obligatorio")
+    @Size(min = 3, max = 50, message = "El método de pago debe tener entre 3 y 50 caracteres")
     private String metodoPago;
 
     public Usuario() {

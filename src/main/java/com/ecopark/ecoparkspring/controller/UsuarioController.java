@@ -1,35 +1,9 @@
-//package com.ecopark.ecoparkspring.controller;
-//
-//import com.ecopark.ecoparkspring.model.Usuario;
-//import com.ecopark.ecoparkspring.service.UsuarioService;
-//import java.util.List;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.*;
-//
-///**
-// * Controlador REST para gestionar usuarios.
-// */
-//@RestController
-//@RequestMapping("/usuarios")
-//public class UsuarioController {
-//
-//    @Autowired
-//    private UsuarioService usuarioService;
-//
-//    @PostMapping
-//    public Usuario crearUsuario(@RequestBody Usuario usuario) {
-//        return usuarioService.guardarUsuario(usuario);
-//    }
-//
-//    @GetMapping
-//    public List<Usuario> listarUsuarios() {
-//        return usuarioService.listarUsuarios();
-//    }
-//}
+
 package com.ecopark.ecoparkspring.controller;
 
 import com.ecopark.ecoparkspring.model.Usuario;
 import com.ecopark.ecoparkspring.service.UsuarioService;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +22,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> crearUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
         return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
     }
@@ -71,7 +45,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable int id, @Valid @RequestBody Usuario usuario) {
         Usuario usuarioActualizado = usuarioService.actualizarUsuario(id, usuario);
 
         if (usuarioActualizado != null) {
