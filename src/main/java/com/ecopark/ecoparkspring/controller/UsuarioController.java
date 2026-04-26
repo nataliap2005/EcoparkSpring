@@ -1,4 +1,3 @@
-
 package com.ecopark.ecoparkspring.controller;
 
 import com.ecopark.ecoparkspring.model.Usuario;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/usuarios")
+@CrossOrigin(origins = "http://localhost:5173") // <-- IMPORTANTE para React
 public class UsuarioController {
 
     @Autowired

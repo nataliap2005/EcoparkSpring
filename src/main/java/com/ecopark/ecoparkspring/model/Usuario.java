@@ -1,11 +1,6 @@
-
 package com.ecopark.ecoparkspring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -20,6 +15,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private int idUsuario;
 
     @NotBlank(message = "El nombre es obligatorio")
@@ -43,6 +39,10 @@ public class Usuario {
     @NotBlank(message = "El método de pago es obligatorio")
     @Size(min = 3, max = 50, message = "El método de pago debe tener entre 3 y 50 caracteres")
     private String metodoPago;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rol")
+    private Rol rol;
 
     public Usuario() {
     }
@@ -110,5 +110,13 @@ public class Usuario {
 
     public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }
