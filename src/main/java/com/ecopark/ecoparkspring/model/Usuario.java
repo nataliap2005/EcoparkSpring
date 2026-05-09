@@ -34,7 +34,7 @@ public class Usuario {
     @Pattern(regexp = "^[0-9]{7,20}$", message = "El celular solo debe contener números y tener entre 7 y 20 dígitos")
     private String celular;
 
-    private boolean discapacidad;
+    private Boolean discapacidad;
 
     @NotBlank(message = "El método de pago es obligatorio")
     @Size(min = 3, max = 50, message = "El método de pago debe tener entre 3 y 50 caracteres")
@@ -47,7 +47,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String email, String contrasena, String celular, boolean discapacidad, String metodoPago) {
+    public Usuario(String nombre, String email, String contrasena, String celular, Boolean discapacidad, String metodoPago) {
         this.nombre = nombre;
         this.email = email;
         this.contrasena = contrasena;
@@ -96,11 +96,11 @@ public class Usuario {
         this.celular = celular;
     }
 
-    public boolean isDiscapacidad() {
+    public Boolean getDiscapacidad() {
         return discapacidad;
     }
 
-    public void setDiscapacidad(boolean discapacidad) {
+    public void setDiscapacidad(Boolean discapacidad) {
         this.discapacidad = discapacidad;
     }
 

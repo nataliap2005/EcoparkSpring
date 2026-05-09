@@ -36,20 +36,34 @@ public class UsuarioService {
     }
 
     public Usuario actualizarUsuario(int id, Usuario usuarioActualizado) {
+
         Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
 
         if (usuarioExistente.isPresent()) {
+
             Usuario usuario = usuarioExistente.get();
 
             usuario.setNombre(usuarioActualizado.getNombre());
             usuario.setEmail(usuarioActualizado.getEmail());
             usuario.setContrasena(usuarioActualizado.getContrasena());
             usuario.setCelular(usuarioActualizado.getCelular());
-            usuario.setDiscapacidad(usuarioActualizado.isDiscapacidad());
+            usuario.setDiscapacidad(usuarioActualizado.getDiscapacidad());
             usuario.setMetodoPago(usuarioActualizado.getMetodoPago());
 
+            // Actualizar rol si viene enviado
+            if (usuarioActualizado.getRol() != null) {
+
+                Optional<Rol> rolOptional = rolRepository.findById(
+                        usuarioActualizado.getRol().getIdRol()
+                );
+
+                rolOptional.ifPresent(usuario::setRol);
+            }
+
             return usuarioRepository.save(usuario);
+
         } else {
+
             return null;
         }
     }
